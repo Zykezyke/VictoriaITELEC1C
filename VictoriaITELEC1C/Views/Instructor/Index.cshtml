@@ -1,0 +1,16 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<h1>Instructor List</h1>
+@model IEnumerable<VictoriaITELEC1C.Models.Instructor>
+<table class ="table">
+    <tr>
+    @foreach(var Instructor in Model)
+    {
+        <td>@Instructor.InstructorName</td>
+        <td>@Instructor.DateHired</td>
+        <td>@Instructor.InstructorEmail</td>
+        <td>@Instructor.InstructorRank</td>
+    }
+    </tr>
+</table>
