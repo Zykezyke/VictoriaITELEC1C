@@ -1,32 +1,34 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IEnumerable<Student>;
 
-<h1>
-    Student List
-</h1>
+<div>Student List</div>
 
-<table>
+
+<table class="table table-dark">
+
     <tr>
-        <td>Student ID</td>
-        <td>@ViewBag.student.StudentId</td>
+        <th colspan="6">Student</th>
     </tr>
+
     <tr>
         <td>Name</td>
-        <td>@ViewBag.student.StudentName</td>
-    </tr>
-    <tr>
-        <td>Date Enrolled</td>
-        <td>@ViewBag.student.DateEnrolled</td>
-    </tr>
-    <tr>
         <td>Course</td>
-        <td>@ViewBag.student.StudentCourse</td>
-    </tr>
-    <tr>
+        <td>Admission Date</td>
         <td>Email</td>
-        <td>@ViewBag.student.Email</td>
+        <td>GPA</td>
+        <td>Details</td>
+
+
     </tr>
+    @foreach (var student in Model)
+    {
+        <tr>
+            <td>@student.FirstName @student.LastName</td>
+            <td>@student.Course</td>
+            <td>@student.AdmissionDate</td>
+            <td>@student.Email</td>
+            <td>@student.GPA</td>
+            <td><a asp-action="ShowDetail" asp-route-id="@student.Id">Show Details</a></td>
+
+        </tr>
+    }
 </table>

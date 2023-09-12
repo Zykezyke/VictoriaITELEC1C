@@ -2,19 +2,22 @@
 {
     public enum Rank
     {
-        Instructor, AsstProf, Prof
+        Instructor, AssistantProfessor, AssociateProfessor, Professor
     }
     public class Instructor
     {
         public int InstructorId { get; set; }
 
-        public string InstructorName { get; set; }
+        public string InsFirst { get; set; }
 
-        public string InstructorEmail { get; set; }
+        public string InsLast { get; set; }
 
-        public DateTime DateHired { get; set; }
+        public bool IsTenured { get; set; }
 
         public Rank InstructorRank { get; set; }
+
+        public DateTime HiringDate { get; set; }
+
         
     }
 }
