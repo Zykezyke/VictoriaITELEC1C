@@ -4,7 +4,9 @@
 @model Instructor;
 @{
     string status = Model.IsTenured == true ? "Permanent" : "Probationary";
- }
+    var today = DateTime.Now;
+    var joblen = today.Subtract(Model.HiringDate);
+}
 
 <h1>Instructor Details</h1>
 
@@ -22,6 +24,14 @@
         <td>@Model.InsFirst</td>
     </tr>
     <tr>
+        <th>Address</th>
+        <td>@Model.InsAdd</td>
+    </tr>
+    <tr>
+        <th>Contact</th>
+        <td>@Model.InsPhone</td>
+    </tr>
+    <tr>
         <th>Employment Status</th>
         <td>@status</td>
     </tr>
@@ -33,4 +43,10 @@
         <th>HiringDate</th>
         <td>@Model.HiringDate</td>
     </tr>
+    <tr>
+        <th>Job length</th>
+        <td>@joblen.Days days</td>
+    </tr>
 </table>
+
+<a type ="button" asp-controller="Instructor" asp-action="Index">Go Back</a>

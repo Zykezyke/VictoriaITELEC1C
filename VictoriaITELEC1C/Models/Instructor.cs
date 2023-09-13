@@ -18,6 +18,9 @@
 
         public DateTime HiringDate { get; set; }
 
-        
+        public string InsAdd { get; set; }
+
+        public string InsPhone { get; set; }
+
     }
 }

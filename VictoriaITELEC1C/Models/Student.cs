@@ -15,6 +15,7 @@
         public Course Course { get; set; }
         public DateTime AdmissionDate { get; set; }
         public string Email { get; set; }
-
+        public string Phone { get; set; }
+        public string Address { get; set; }
     }
 }
