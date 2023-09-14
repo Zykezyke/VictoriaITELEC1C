@@ -12,7 +12,7 @@
 
         public string InsLast { get; set; }
 
-        public bool IsTenured { get; set; }
+        public Boolean IsTenured { get; set; }
 
         public Rank InstructorRank { get; set; }
 

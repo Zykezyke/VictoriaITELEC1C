@@ -1,0 +1,53 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Student;
+<h1>Add a new student</h1>
+<form asp-action="AddStudent" asp-controller="Student" method="post">
+    <div class="form-group">
+        <label asp-for="Id">ID</label>
+        <input type="number" class="form-control" aria-describedby="IDHelp" placeholder="Enter Student ID" asp-for="Id">
+    </div>
+    <div class="row">
+    <div class="form-group col">
+            <label asp-for="FirstName">First Name</label>
+            <input type="text" class="form-control" aria-describedby="FirstHelp" placeholder="Enter Student First Name" asp-for="FirstName">
+       </div>
+    <div class="form-group col">
+            <label asp-for="LastName">Last Name</label>
+            <input type="text" class="form-control" aria-describedby="LastHelp" placeholder="Enter Student Last Name" asp-for="FirstName">
+    </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="GPA">GPA</label>
+        <input type="number" step="0.001" class="form-control" aria-describedby="GPAHelp" placeholder="Enter Student GPA" asp-for="GPA">
+    </div>
+    <div class="form-group">
+        <label asp-for="Course">Course</label>
+        <select class="form-control form-select" asp-items = "@Html.GetEnumSelectList(typeof(Course))" aria-describedby="CourseHelp" placeholder="Select Student Course" asp-for="Course">
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="AdmissionDate">Admission Date</label>
+        <input type="date" class="form-control" aria-describedby="AdmHelp" asp-for="AdmissionDate">
+    </div>
+    <div class="form-group">
+        <label asp-for="Email">Email address</label>
+        <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter Student Email" asp-for="Email">
+    </div>
+    <div class="form-group">
+        <label asp-for="Phone">Phone Number</label>
+        <input type="text" class="form-control" aria-describedby="PhoneHelp" placeholder="Enter Student Phone" asp-for="Phone">
+    </div>
+    <div class="form-group">
+        <label asp-for="Address">Address</label>
+        <input type="text" class="form-control" aria-describedby="AddressHelp" placeholder="Enter Student Address" asp-for="Address">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<a class="btn btn-dark" type="button" asp-controller="Student" asp-action="Index">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
+    </svg> Go Back
+</a>

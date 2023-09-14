@@ -3,6 +3,8 @@
 <div>Student List</div>
 
 
+<a class="btn btn-primary" asp-controller="Student" asp-action="AddStudent">Add Student</a>
+
 <table class="table table-dark">
 
     <tr>
@@ -24,7 +26,7 @@
         <tr>
             <td>@student.FirstName @student.LastName</td>
             <td>@student.Course</td>
-            <td>@student.AdmissionDate</td>
+            <td>@student.AdmissionDate.ToString("MM/dd/yyyy")</td>
             <td>@student.Email</td>
             <td>@student.GPA</td>
             <td><a class="btn btn-light" asp-action="ShowDetail" asp-route-id="@student.Id">Show Details</a></td>
