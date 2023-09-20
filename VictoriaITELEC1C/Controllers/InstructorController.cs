@@ -55,5 +55,34 @@ namespace VictoriaITELEC1C.Controllers
             InstructorList.Add(newInstructor);
             return View("Index", InstructorList);
         }
+
+        [HttpGet]
+        public IActionResult UpdateInstructor(int id)
+        {
+            Instructor? instructor = InstructorList.FirstOrDefault(ins => ins.InstructorId == id);
+
+            if (instructor != null)
+                return View(instructor);
+
+            return NotFound();
+        }
+
+        [HttpPost]
+        public IActionResult UpdateInstructor(Instructor instructorChanges)
+        {
+            Instructor? instructor = InstructorList.FirstOrDefault(ins => ins.InstructorId == instructorChanges.InstructorId);
+
+            if (instructor != null)
+            {
+                instructor.InsFirst = instructorChanges.InsFirst;
+                instructor.InsLast = instructorChanges.InsLast;
+                instructor.InstructorRank = instructorChanges.InstructorRank;
+                instructor.InsPhone = instructorChanges.InsPhone;
+                instructor.HiringDate = instructorChanges.HiringDate;
+                instructor.IsTenured    = instructorChanges.IsTenured;
+                instructor.InsAdd = instructor.InsAdd;
+            }
+            return View("Index", InstructorList);
+        }
     }
 }
