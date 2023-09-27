@@ -80,7 +80,28 @@ namespace VictoriaITELEC1C.Controllers
             }
             return View("Index", StudentList);
         }
-       
 
+        [HttpGet]
+
+        public IActionResult DeleteStudent(int id)
+        {
+            Student? student = StudentList.FirstOrDefault(st => st.Id == id);
+
+            if (student != null)//was an student found?
+                return View(student);
+
+            return NotFound();
+        }
+
+        [HttpPost]
+        public IActionResult DeleteStudent(Student delStudent)
+        {
+            Student? student = StudentList.FirstOrDefault(st => st.Id == delStudent.Id);
+            if (student != null)
+            {
+                StudentList.Remove(student);
+            }
+            return View("Index", StudentList);
+        }
     }
 }

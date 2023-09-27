@@ -84,5 +84,29 @@ namespace VictoriaITELEC1C.Controllers
             }
             return View("Index", InstructorList);
         }
+
+        [HttpGet]
+        public IActionResult DeleteInstructor(int id)
+        {
+            Instructor? instructor = InstructorList.FirstOrDefault(ins => ins.InstructorId == id);
+
+            if (instructor != null)
+                return View(instructor);
+
+            return NotFound();
+        }
+
+        [HttpPost]
+        public IActionResult DeleteInstructor(Instructor deleteIns)
+        {
+            Instructor? instructor = InstructorList.FirstOrDefault(ins => ins.InstructorId == deleteIns.InstructorId);
+
+            if (instructor != null)
+            {
+                InstructorList.Remove(instructor);
+            }
+            return View("Index", InstructorList);
+        }
+
     }
 }
