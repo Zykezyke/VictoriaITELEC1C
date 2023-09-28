@@ -1,7 +1,13 @@
+using VictoriaITELEC1C.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSingleton<IStudentDummy, StudentDummy>();
+
+builder.Services.AddSingleton<IInstructorDummy, InstructorDummy>();
 
 var app = builder.Build();
 
