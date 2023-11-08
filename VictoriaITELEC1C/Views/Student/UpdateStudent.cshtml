@@ -4,10 +4,6 @@
 @model Student;
 <h1>Update student</h1>
 <form asp-action="UpdateStudent" asp-controller="Student" method="post">
-    <div class="form-group" hidden>
-        <label asp-for="Id">ID</label>
-        <input type="number" class="form-control" aria-describedby="IDHelp" placeholder="Enter Student ID" asp-for="Id">
-    </div>
     <div class="row">
         <div class="form-group col">
             <label asp-for="FirstName">First Name</label>

@@ -4,10 +4,6 @@
 @model Instructor;
 <h1>Add a new instructor</h1>
 <form asp-action="UpdateInstructor" asp-controller="Instructor" method="post">
-    <div class="form-group" hidden>
-        <label asp-for="InstructorId">ID</label>
-        <input type="number" class="form-control" placeholder="Enter Instructor ID" asp-for="InstructorId">
-    </div>
     <div class="row">
         <div class="form-group col">
             <label asp-for="InsFirst">First Name</label>

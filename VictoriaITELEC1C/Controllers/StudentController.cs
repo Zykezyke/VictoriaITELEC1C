@@ -1,27 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using VictoriaITELEC1C.Data;
 using VictoriaITELEC1C.Models;
-using VictoriaITELEC1C.Services;
 
 namespace VictoriaITELEC1C.Controllers
 {
     public class StudentController : Controller
     {
-        private readonly IStudentDummy _dummyData;
+        private readonly AppDbContext _dbData;
 
-        public StudentController(IStudentDummy dummyData)
+        public StudentController(AppDbContext dbData)
         {
-            _dummyData = dummyData;
+            _dbData = dbData;
         }
         public IActionResult Index()
         {
 
-            return View(_dummyData.StudentList);
+            return View(_dbData.Students);
         }
 
         public IActionResult ShowDetail(int id)
         {
             //Search for the student whose id matches the given id
-            Student? student = _dummyData.StudentList.FirstOrDefault(st => st.Id == id);
+            Student? student = _dbData.Students.FirstOrDefault(st => st.Id == id);
 
             if (student != null)//was an student found?
                 return View(student);
@@ -39,14 +39,18 @@ namespace VictoriaITELEC1C.Controllers
         [HttpPost]
         public IActionResult AddStudent(Student newStudent)
         {
-            _dummyData.StudentList.Add(newStudent);
+            if (!ModelState.IsValid)
+                return View();
+
+            _dbData.Students.Add(newStudent);
+            _dbData.SaveChanges();
             return RedirectToAction("Index");
         }
 
         [HttpGet]
 
         public IActionResult UpdateStudent(int id) {
-            Student? student = _dummyData.StudentList.FirstOrDefault(st => st.Id == id);
+            Student? student = _dbData.Students.FirstOrDefault(st => st.Id == id);
 
             if (student != null)//was an student found?
                 return View(student);
@@ -57,7 +61,7 @@ namespace VictoriaITELEC1C.Controllers
         [HttpPost]
         public IActionResult UpdateStudent(Student studentChanges)
         {
-            Student? student = _dummyData.StudentList.FirstOrDefault(st => st.Id == studentChanges.Id);
+            Student? student = _dbData.Students.FirstOrDefault(st => st.Id == studentChanges.Id);
 
             if (student != null)
             {
@@ -69,6 +73,8 @@ namespace VictoriaITELEC1C.Controllers
                 student.Address = studentChanges.Address;
                 student.AdmissionDate   = studentChanges.AdmissionDate;
                 student.GPA = studentChanges.GPA;
+
+                _dbData.SaveChanges();
             }
             return RedirectToAction("Index");
         }
@@ -77,7 +83,7 @@ namespace VictoriaITELEC1C.Controllers
 
         public IActionResult DeleteStudent(int id)
         {
-            Student? student = _dummyData.StudentList.FirstOrDefault(st => st.Id == id);
+            Student? student = _dbData.Students.FirstOrDefault(st => st.Id == id);
 
             if (student != null)//was an student found?
                 return View(student);
@@ -88,10 +94,11 @@ namespace VictoriaITELEC1C.Controllers
         [HttpPost]
         public IActionResult DeleteStudent(Student delStudent)
         {
-            Student? student = _dummyData.StudentList.FirstOrDefault(st => st.Id == delStudent.Id);
+            Student? student = _dbData.Students.FirstOrDefault(st => st.Id == delStudent.Id);
             if (student != null)
             {
-                _dummyData.StudentList.Remove(student);
+                _dbData.Students.Remove(student);
+                _dbData.SaveChanges();
             }
             return RedirectToAction("Index");
         }

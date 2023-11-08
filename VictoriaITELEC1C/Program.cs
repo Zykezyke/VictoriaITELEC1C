@@ -1,13 +1,21 @@
-using VictoriaITELEC1C.Services;
+
+using VictoriaITELEC1C.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddSingleton<IStudentDummy, StudentDummy>();
 
-builder.Services.AddSingleton<IInstructorDummy, InstructorDummy>();
+//DbContext
+builder.Services.AddDbContext<AppDbContext>(
+        options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
+
+//builder.Services.AddSingleton<IStudentDummy, StudentDummy>();
+
+//builder.Services.AddSingleton<IInstructorDummy, InstructorDummy>();
 
 var app = builder.Build();
 
@@ -16,6 +24,10 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
 }
+
+var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<AppDbContext>();
+context.Database.EnsureCreated();
+
 app.UseStaticFiles();
 
 app.UseRouting();
