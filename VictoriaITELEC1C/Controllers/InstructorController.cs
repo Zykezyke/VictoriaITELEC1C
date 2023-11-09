@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using VictoriaITELEC1C.Data;
 using VictoriaITELEC1C.Models;
 
@@ -13,6 +14,7 @@ namespace VictoriaITELEC1C.Controllers
             _dbData = dbData;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
 
@@ -36,6 +38,7 @@ namespace VictoriaITELEC1C.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult AddInstructor(Instructor newInstructor)
         {

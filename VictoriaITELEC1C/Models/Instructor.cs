@@ -24,6 +24,7 @@ namespace VictoriaITELEC1C.Models
         public Rank InstructorRank { get; set; }
 
         [Display(Name = "Date Hired")]
+        [DataType(DataType.Date)]
         [Required(ErrorMessage = "Please Set A Date")]
         public DateTime HiringDate { get; set; }
 

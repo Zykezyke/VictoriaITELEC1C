@@ -18,12 +18,14 @@ namespace VictoriaITELEC1C.Models
         public string LastName { get; set; }
         [Display(Name = "GPA")]
         [Required(ErrorMessage = "Please Enter Your GPA")]
-        public double GPA { get; set; }
+        public double? GPA { get; set; }
         [Display(Name = "Course")]
+        [Required(ErrorMessage = "Please Select A Course")]
         public Course Course { get; set; }
         [Display(Name = "Admission Date")]
+        [DataType(DataType.Date)]
         [Required(ErrorMessage = "Please Enter A Date")]
-        public DateTime AdmissionDate { get; set; }
+        public DateTime? AdmissionDate { get; set; }
         [Display(Name = "Email")]
         [Required(ErrorMessage = "Please Enter Your Email")]
         public string Email { get; set; }
