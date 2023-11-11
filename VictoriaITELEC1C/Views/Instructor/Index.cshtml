@@ -28,7 +28,7 @@
             <td>@instructor.InsFirst @instructor.InsLast</td>
             <td>@status</td>
             <td>@instructor.InstructorRank</td>
-            <td>@instructor.HiringDate.ToString("MM/dd/yyyy")</td>
+            <td>@instructor.HiringDate</td>
             <td><a class = "btn btn-light" asp-action="ShowDetail" asp-route-id="@instructor.InstructorId">Show Details</a></td>
             <td><a class="btn btn-primary" asp-action="UpdateInstructor" asp-route-id="@instructor.InstructorId">Update Details</a></td>
             <td><a class="btn btn-danger" asp-action="DeleteInstructor" asp-route-id="@instructor.InstructorId">Delete Instructor</a></td>

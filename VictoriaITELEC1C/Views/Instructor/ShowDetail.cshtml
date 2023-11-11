@@ -5,7 +5,9 @@
 @{
     string status = Model.IsTenured == true ? "Permanent" : "Probationary";
     var today = DateTime.Now;
-    var joblen = today.Subtract(Model.HiringDate);
+    if (!Model.HiringDate.HasValue) return;
+    var hd = Model.HiringDate.Value;
+    var joblen = today.Subtract(hd);
 }
 
 <h1>Instructor Details</h1>
@@ -41,7 +43,7 @@
     </tr>
     <tr>
         <th>HiringDate</th>
-        <td>@Model.HiringDate.ToString("MM/dd/yyyy")</td>
+        <td>@Model.HiringDate</td>
     </tr>
     <tr>
         <th>Job length</th>

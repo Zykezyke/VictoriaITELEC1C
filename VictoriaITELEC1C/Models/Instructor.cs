@@ -26,7 +26,7 @@ namespace VictoriaITELEC1C.Models
         [Display(Name = "Date Hired")]
         [DataType(DataType.Date)]
         [Required(ErrorMessage = "Please Set A Date")]
-        public DateTime HiringDate { get; set; }
+        public DateTime? HiringDate { get; set; }
 
         [Display(Name = "Address")]
         [Required(ErrorMessage = "Please Enter Your Address")]
