@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VictoriaITELEC1C.Models
 {
@@ -35,5 +36,12 @@ namespace VictoriaITELEC1C.Models
         [Display(Name = "Address")]
         [Required(ErrorMessage = "Please Enter Your Address")]
         public string Address { get; set; }
+
+        
+        [NotMapped]
+        public IFormFile? StudentPfp { get; set; }
+
+        [Display(Name = "Profile Picture")]
+        public string? imagePath { get; set; }
     }
 }

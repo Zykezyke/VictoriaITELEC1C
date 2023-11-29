@@ -8,13 +8,15 @@ namespace VictoriaITELEC1C.Controllers
     public class StudentController : Controller
     {
         private readonly AppDbContext _dbData;
+        private readonly IWebHostEnvironment _environment;
 
-        public StudentController(AppDbContext dbData)
+        public StudentController(AppDbContext dbData, IWebHostEnvironment environment)
         {
             _dbData = dbData;
+            _environment = environment;
         }
 
-        
+
         public IActionResult Index()
         {
 
@@ -26,9 +28,16 @@ namespace VictoriaITELEC1C.Controllers
             //Search for the student whose id matches the given id
             Student? student = _dbData.Students.FirstOrDefault(st => st.Id == id);
 
-            if (student != null)//was an student found?
+            if (student != null) { //was an student found?
+                /*if (student.StudentPfp != null)
+                {
+                    string imageBase64Data = Convert.ToBase64String(student.StudentPfp);
+                    string imageDataURL = string.Format("data:image/png;base64, {0}", imageBase64Data);
+                    ViewBag.StudentPfp = imageDataURL;
+                }
+                */
                 return View(student);
-
+            }
             return NotFound();
         }
 
@@ -46,6 +55,26 @@ namespace VictoriaITELEC1C.Controllers
             if (!ModelState.IsValid)
                 return View();
 
+            string folder = "students/images/";
+            string servFolder = Path.Combine(_environment.WebRootPath, folder);
+            string uniqueFileName = Guid.NewGuid().ToString() + "_" + newStudent.StudentPfp.FileName;
+            string filePath = Path.Combine(servFolder, uniqueFileName);
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                newStudent.StudentPfp.CopyTo(fileStream);
+            }
+            newStudent.imagePath = folder + uniqueFileName;
+            /*
+            if (Request.Form.Files.Count > 0)
+            {
+                var file = Request.Form.Files[0];
+                MemoryStream ms = new MemoryStream();
+                file.CopyTo(ms);
+                newStudent.StudentPfp = ms.ToArray();
+                ms.Close();
+                ms.Dispose();
+            }
+            */
             _dbData.Students.Add(newStudent);
             _dbData.SaveChanges();
             return RedirectToAction("Index");

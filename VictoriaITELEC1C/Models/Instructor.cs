@@ -36,5 +36,8 @@ namespace VictoriaITELEC1C.Models
         [Required(ErrorMessage = "Please Enter Your Phone Number")]
         public string InsPhone { get; set; }
 
+        [Display(Name = "Profile Picture")]
+        public byte[]? InstructorPfp { get; set; }
+
     }
 }

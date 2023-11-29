@@ -4,8 +4,12 @@
 @model Student;
 <h1>Add a new student</h1>
 <div asp-validation-summary="All" class="text-danger"></div>
-<form asp-action="AddStudent" asp-controller="Student" method="post">
+<form asp-action="AddStudent" asp-controller="Student" method="post" enctype="multipart/form-data">
     <div class="row">
+        <div class="form-group col">
+            <label asp-for="StudentPfp">Student Profile Photo</label>
+            <input type="file" class="form-control" aria-describedby="PhotoHelp" placeholder="Upload image" asp-for="StudentPfp">
+        </div>
     <div class="form-group col">
             <label asp-for="FirstName">First Name</label>
             <input type="text" class="form-control" aria-describedby="FirstHelp" placeholder="Enter Student First Name" asp-for="FirstName">
