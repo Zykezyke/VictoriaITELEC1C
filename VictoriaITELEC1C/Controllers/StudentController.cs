@@ -32,6 +32,7 @@ namespace VictoriaITELEC1C.Controllers
             return NotFound();
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult AddStudent()
         {

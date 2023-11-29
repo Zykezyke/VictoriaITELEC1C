@@ -28,7 +28,7 @@ namespace VictoriaITELEC1C.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Instructor");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -67,7 +67,7 @@ namespace VictoriaITELEC1C.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Instructor");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
