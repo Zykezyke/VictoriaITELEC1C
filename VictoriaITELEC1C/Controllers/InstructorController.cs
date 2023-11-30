@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using VictoriaITELEC1C.Data;
 using VictoriaITELEC1C.Models;
 
@@ -8,11 +9,14 @@ namespace VictoriaITELEC1C.Controllers
     public class InstructorController : Controller
     {
         private readonly AppDbContext _dbData;
+        private readonly IWebHostEnvironment _environment;
 
-        public InstructorController(AppDbContext dbData)
+        public InstructorController (AppDbContext dbData, IWebHostEnvironment environment)
         {
             _dbData = dbData;
+            _environment = environment;
         }
+
 
         [Authorize]
         public IActionResult Index()
@@ -44,6 +48,18 @@ namespace VictoriaITELEC1C.Controllers
         {
             if(!ModelState.IsValid)
                 return View();
+
+            string fold = "instructors/images/";
+            string servFold = Path.Combine(_environment.WebRootPath, fold);
+            string uniqFileName = Guid.NewGuid().ToString() + "_" + newInstructor.InstructPfp.FileName;
+            string fiPath = Path.Combine(servFold, uniqFileName);
+            using (var fiStream = new FileStream(fiPath, FileMode.Create))
+            {
+                newInstructor.InstructPfp.CopyTo(fiStream);
+            }
+            newInstructor.ImgPath = fold + uniqFileName;
+
+
 
             _dbData.Instructors.Add(newInstructor);
             _dbData.SaveChanges();

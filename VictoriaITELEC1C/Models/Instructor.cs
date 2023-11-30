@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VictoriaITELEC1C.Models
 {
@@ -38,6 +39,13 @@ namespace VictoriaITELEC1C.Models
 
         [Display(Name = "Profile Picture")]
         public byte[]? InstructorPfp { get; set; }
+
+
+        [NotMapped]
+        public IFormFile? InstructPfp { get; set; }
+
+        [Display(Name = "Profile Picture")]
+        public string? ImgPath { get; set; }
 
     }
 }
